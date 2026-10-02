@@ -1,0 +1,249 @@
+@import "tailwindcss";
+
+/* ════════════════════════════════════════════════════════════════════════════
+   REALM OF TASKS — Dark Fantasy / Skyrim / Lord of the Rings Theme
+   Palette: Reseda Green · Sage · Lavender Blush · Tea Rose · Light Coral
+   ════════════════════════════════════════════════════════════════════════════ */
+
+/* ── Google Fonts loaded via layout.tsx (Cinzel + IM Fell English) ───────── */
+
+:root {
+  /* ── Raw palette swatches ──────────────────────────────────────────────── */
+  --reseda:        #828C6A;   /* Reseda green — raw swatch (for borders/backgrounds) */
+  --sage:          #A0AB89;   /* Sage — raw swatch                    */
+  --blush:         #F6E5E7;   /* Lavender blush — lightest surface    */
+  --tea-rose:      #EFC0BC;   /* Tea rose — done / success            */
+  --coral:         #E69B97;   /* Light coral — danger / discard       */
+
+  /* Derived shades */
+  --reseda-dark:   #5c6449;   /* deep reseda — pressed state, borders */
+  --reseda-dim:    #4a5038;   /* darker still — subtle borders        */
+  --sage-light:    #bcc4a6;   /* lighter sage — muted text accents    */
+  --coral-dark:    #c4635f;   /* deeper coral — active danger         */
+  --tea-dark:      #c8918c;   /* deeper tea rose                      */
+  --blush-dim:     #e8cdd0;   /* slightly deeper blush                */
+
+  /* ── Readable interactive colour — boosted for dark bg contrast ──────── */
+  /* #A0AB89 sage is only ~3:1 on #0f110d — bump to a lighter value        */
+  --reseda-readable: #c8d4b0;  /* light sage — WCAG AA on dark bg (~6:1) */
+  --gold: var(--reseda-readable); /* alias so any remaining refs work    */
+
+  /* ── Surfaces — deep earthy stone ─────────────────────────────────────── */
+  --bg:            #0f110d;   /* near-black with green undertone      */
+  --surface:       #1a1e16;   /* dark mossy stone — card bg           */
+  --surface-raised:#212618;   /* slightly lifted panel                */
+  --surface-inset: #121510;   /* recessed — input bg                  */
+  --parchment:     #1e2219;   /* warm dark moss — main card           */
+  --parchment-mid: #252a1e;   /* slightly lighter moss                */
+
+  /* ── Semantic colour tokens ───────────────────────────────────────────── */
+  --color-primary:        var(--reseda-readable);   /* light sage — readable on dark */
+  --color-primary-dark:   #dce8c4;                  /* even lighter for hover        */
+  --color-secondary:      var(--tea-rose);
+  --color-secondary-dark: var(--tea-dark);
+  --color-accent:         var(--coral);
+  --color-accent-dark:    var(--coral-dark);
+
+  --color-bg:             var(--bg);
+  --color-surface:        var(--parchment);
+  --color-muted:          var(--parchment-mid);
+  --color-overlay:        rgba(10,12,8,0.88);
+
+  /* Text — blush-white on all dark surfaces (WCAG AA ✓) */
+  --color-text:           #e8e2d8;   /* warm off-white parchment       */
+  --color-text-muted:     #a8b090;   /* sage-grey — boosted for readability */
+  --color-text-on-accent: #1a1e16;   /* dark text ON light swatches    */
+
+  /* Borders */
+  --color-border:         #2e3428;   /* dark mossy border              */
+  --color-border-gold:    var(--reseda-dim);  /* primary-tinted border */
+
+  /* Done / success — tea-rose family */
+  --color-done:           #2a1e1e;   /* deep rose fill                 */
+  --color-done-dark:      var(--tea-rose);
+  --color-done-text:      var(--tea-rose);
+
+  /* Discard / danger — coral family */
+  --color-discard:        #2a1614;
+  --color-discard-dark:   var(--coral);
+  --color-discard-text:   var(--coral);
+
+  /* Glow / shadow */
+  --color-shadow:         rgba(0,0,0,0.75);
+  --color-glow-primary:   rgba(130,140,106,0.3);
+  --color-glow-done:      rgba(239,192,188,0.2);
+
+  /* ── Typography ────────────────────────────────────────────────────────── */
+  --font-display: 'Cinzel', 'Palatino Linotype', Georgia, serif;
+  --font-body:    'IM Fell English', 'Palatino Linotype', Georgia, serif;
+
+  /* ── Gradients ─────────────────────────────────────────────────────────── */
+  --gradient-header: linear-gradient(180deg, #161a12 0%, #0f110d 100%);
+  --gradient-primary: linear-gradient(135deg, var(--reseda) 0%, var(--sage) 50%, var(--reseda) 100%);
+  --gradient-card:    linear-gradient(160deg, #1e2219 0%, #161a12 100%);
+  --gradient-spin:    linear-gradient(135deg, var(--reseda), var(--sage));
+}
+
+/* ── Light mode override ─────────────────────────────────────────────────── */
+/* Keep realm dark by default; toggling adds .dark or removes it */
+.dark {
+  --color-bg:      #0a0c09;
+  --color-surface: #181c14;
+  --color-muted:   #1e2219;
+}
+
+/* ════════════════════════════════════════════════════════════════════════════
+   BASE
+   ════════════════════════════════════════════════════════════════════════════ */
+
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  min-height: 100dvh;
+  transition: background-color 0.4s ease, color 0.4s ease;
+  background-image:
+    radial-gradient(ellipse at 20% 50%, rgba(130,140,106,0.04) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 20%, rgba(230,155,151,0.03) 0%, transparent 50%);
+}
+
+/* ── Focus ring ─────────────────────────────────────────────────────────── */
+:focus-visible {
+  outline: 2px solid var(--sage);
+  outline-offset: 3px;
+  border-radius: 3px;
+}
+
+/* ── Scrollbar ──────────────────────────────────────────────────────────── */
+::-webkit-scrollbar         { width: 6px; height: 6px; }
+::-webkit-scrollbar-track   { background: var(--surface); }
+::-webkit-scrollbar-thumb   { background: var(--reseda-dark); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--reseda); }
+
+/* ── Selection ──────────────────────────────────────────────────────────── */
+::selection { background: rgba(160,171,137,0.35); color: var(--color-text); }
+
+/* ════════════════════════════════════════════════════════════════════════════
+   TYPOGRAPHY HELPERS
+   ════════════════════════════════════════════════════════════════════════════ */
+
+.font-display { font-family: var(--font-display); letter-spacing: 0.05em; }
+.font-lore    { font-family: var(--font-body); font-style: italic; }
+
+/* Primary-colour text — uses readable light sage */
+.text-gold {
+  color: var(--reseda-readable);
+}
+
+/* Gradient shimmer on display headings */
+.text-gold-gradient {
+  background: linear-gradient(135deg, var(--sage-light) 0%, #dce8c4 50%, var(--sage-light) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ════════════════════════════════════════════════════════════════════════════
+   DECORATIVE ELEMENTS
+   ════════════════════════════════════════════════════════════════════════════ */
+
+/* Ornamental ruled divider */
+.divider-rune {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: var(--reseda);
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+}
+.divider-rune::before,
+.divider-rune::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--reseda), transparent);
+}
+
+/* Card border — moss-stone rune style */
+.border-rune {
+  border: 1px solid var(--color-border-gold);
+  box-shadow:
+    0 0 0 1px rgba(130,140,106,0.08),
+    inset 0 1px 0 rgba(160,171,137,0.05),
+    0 4px 24px rgba(0,0,0,0.65);
+}
+
+/* Glow for active / highlighted cards */
+.glow-gold {
+  box-shadow:
+    0 0 14px var(--color-glow-primary),
+    0 0 28px rgba(130,140,106,0.12),
+    inset 0 1px 0 rgba(160,171,137,0.08);
+}
+
+/* Subtle inner shimmer on cards */
+.card-ornate {
+  position: relative;
+}
+.card-ornate::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(
+    135deg,
+    rgba(130,140,106,0.06) 0%,
+    transparent 40%,
+    transparent 60%,
+    rgba(160,171,137,0.03) 100%
+  );
+  pointer-events: none;
+}
+
+/* ════════════════════════════════════════════════════════════════════════════
+   ANIMATIONS
+   ════════════════════════════════════════════════════════════════════════════ */
+
+@keyframes rune-spin {
+  0%   { transform: rotate(0deg)   scale(1);    filter: brightness(1);   }
+  25%  { transform: rotate(180deg) scale(1.12); filter: brightness(1.3); }
+  50%  { transform: rotate(360deg) scale(1);    filter: brightness(1);   }
+  75%  { transform: rotate(540deg) scale(1.06); filter: brightness(1.15);}
+  100% { transform: rotate(720deg) scale(1);    filter: brightness(1);   }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0);    }
+}
+
+@keyframes slide-in {
+  from { opacity: 0; transform: translateX(-14px); }
+  to   { opacity: 1; transform: translateX(0);     }
+}
+
+@keyframes pop {
+  0%   { transform: scale(1);    }
+  50%  { transform: scale(1.06); }
+  100% { transform: scale(1);    }
+}
+
+@keyframes gold-pulse {
+  0%, 100% { box-shadow: 0 0 8px rgba(130,140,106,0.2); }
+  50%       { box-shadow: 0 0 22px rgba(130,140,106,0.5); }
+}
+
+@keyframes ember-flicker {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.72; }
+}
+
+.animate-fade-in    { animation: fade-in    0.4s  ease both; }
+.animate-slide-in   { animation: slide-in   0.35s ease both; }
+.animate-pop        { animation: pop        0.3s  ease both; }
+.animate-spinning   { animation: rune-spin  0.9s  ease both; }
+.animate-gold-pulse { animation: gold-pulse 2s    ease-in-out infinite; }
+.animate-flicker    { animation: ember-flicker 3s ease-in-out infinite; }
