@@ -25,7 +25,7 @@ The full version (accounts, sync between everyone's phones, AI-suggested sub-que
 
 ```
 src/
-  app/                       layout, page, PWA manifest and icons
+  app/                       layout, page and icons
   components/wishlist/       the board: quests, dailies, main tasks, glory, annals, modals
   components/ui/             Button, Card, Input, Modal, Badge
   lib/store.ts               reducer: every game rule (spins, shared completion, points, month close)

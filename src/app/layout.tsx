@@ -21,11 +21,6 @@ const imFell = IM_Fell_English({
 export const metadata: Metadata = {
   title: "The Realm of Tasks",
   description: "A household quest board: daily deeds, weekly quests and lifelong dreams. Works in your browser, no account needed.",
-  appleWebApp: {
-    capable: true,
-    statusBarStyle: "black-translucent",
-    title: "Realm of Tasks",
-  },
 };
 
 export const viewport: Viewport = {
